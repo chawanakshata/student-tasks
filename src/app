@@ -1,0 +1,44 @@
+const express = require('express');
+const app=express();
+const cors=require('cors');
+const port = 3300;
+
+app.use(cors());
+const studentTasks = require('./models/info');
+
+require('./db/conn');
+app.use(express.json());
+
+
+app.get('/',(req, res) => {
+    res.send('<h1>hello</h1>')
+})
+
+app.get('/getstudentTask',async (req,res)=>{
+    try{
+         const getTask = await studentTasks.find({});        
+         res.status(201).send(getTask);
+    }
+    catch(e){
+        console.log(e);
+
+    }
+})
+
+app.post('/studentTask',async (req,res)=>{
+    try{
+         const addstudentTask = studentTasks(req.body);
+         const insertData = await addstudentTask.save();
+         console.log(insertData);
+         res.status(201).send(insertData);
+    }
+    catch(e){
+        console.log(e);
+    }
+})
+
+app.listen(port,()=>{
+    console.log(`server is listening at port no ${port}`)
+})
+
+
