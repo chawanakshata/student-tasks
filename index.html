@@ -1,0 +1,33 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Manager</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Task Manager</h1>
+    <form id="taskForm">
+        <label for="courseId">Course ID:</label>
+        <input type="text" id="courseId" required>
+        <label for="taskName">Task Name:</label>
+        <input type="text" id="taskName" required>
+        <label for="dueDate">Due Date:</label>
+        <input type="date" id="dueDate" required>
+        <label for="additionalDetails">Additional Details:</label>
+        <textarea id="additionalDetails"></textarea>
+        <button type="button" onclick="navigateToPage()">Submit</button>
+    </form>
+    <script>
+        function navigateToPage() {
+            window.location.href = 'app1.html';
+        }
+        fetch('http://localhost:3300/getstudentTask')
+        .then((res) => res.json())
+        .then((data) => console.log('data',data))
+        .catch((e) => console.log(e))
+    </script>
+</body>
+</html>
