@@ -1,0 +1,19 @@
+// server.js
+const mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost:27017/student_tasks')
+.then(()=>console.log('Database connected'))
+.catch(()=>console.log('Database not connected'))
+
+
+
+// MongoDB schemas and models (assuming you have defined them)
+
+const Task = mongoose.Schema({
+    courseId: String,
+    taskName: String,
+    dueDate: String,
+    additionalDetails: String,
+});
+
+const studentTask=new mongoose.model('tasks',Task)
+module.exports=studentTask;
